@@ -1,17 +1,23 @@
 import React from 'react';
 import classes from './Info.module.scss';
-import Rain from '../../../../assets/rainy-outline.svg';
-import { WiRain } from 'weather-icons-react';
+// import { WiRain } from 'weather-icons-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCloudShowersHeavy } from '@fortawesome/free-solid-svg-icons';
 
 const info = (props) => (
 	<div className={classes.info}>
-		<div className={classes.value}>09</div>
+		<div className={classes.value}>09&deg;</div>
 		<div className={classes.details}>
 			<div className={classes.location}>London</div>
 			<div className={classes.timeDate}>06:09- Monday, 9 Sep '19</div>
 		</div>
 		<div className={classes.condition}>
-			<WiRain size={70} color='#fff' />
+			<FontAwesomeIcon
+				icon={faCloudShowersHeavy}
+				color='white'
+				size='3x'
+				className={classes.icon}
+			/>
 			<h4>Rainy</h4>
 		</div>
 	</div>

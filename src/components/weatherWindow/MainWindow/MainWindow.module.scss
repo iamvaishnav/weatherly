@@ -6,5 +6,18 @@
 	justify-content: space-between;
 	height: 100vh;
 	flex-basis: 70%;
-	padding: 20px;
+
+	.navBar {
+		display: flex;
+		justify-content: space-between;
+		padding: 20px;
+
+		.search {
+			flex-basis: 20%;
+			margin-right: 10px;
+			@include mQ(460px) {
+				margin: 0;
+			}
+		}
+	}
 }

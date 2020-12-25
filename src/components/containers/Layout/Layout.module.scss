@@ -6,9 +6,14 @@
 	width: 100%;
 	background: url('../../../assets/rainy.jpg') center no-repeat;
 	background-size: cover;
+	overflow-x: hidden;
 
-	@include mQ(700px) {
+	@include mQ(500px, 778px) {
 		flex-direction: column;
-		height: auto;
+		height: 170vh;
+	}
+	@include mQ(499px) {
+		flex-direction: column;
+		height: 160vh;
 	}
 }
