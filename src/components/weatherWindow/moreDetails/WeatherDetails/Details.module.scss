@@ -1,0 +1,35 @@
+@import '../../../../scss/mixins';
+
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	color: white;
+	width: 100%;
+	margin-top: 80px;
+	padding: 30px;
+
+	@include mQ(778px) {
+		margin-top: 30px;
+	}
+	@include mQ(500px, 778px) {
+		padding: 30px 120px;
+	}
+	@include mQ(420px, 499px) {
+		padding: 30px 70px;
+	}
+
+	h3 {
+		font-family: inherit;
+		text-transform: uppercase;
+		text-align: center;
+		font-weight: 600;
+	}
+
+	.details {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		margin-top: 40px;
+	}
+}
