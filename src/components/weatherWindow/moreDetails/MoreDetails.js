@@ -16,7 +16,7 @@ const MoreDetails = (props) => {
 	});
 	return (
 		<div className={classes.more}>
-			{isDesktop ? <Search /> : null}
+			{isDesktop ? <Search className={classes.search} /> : null}
 			<Details />
 		</div>
 	);

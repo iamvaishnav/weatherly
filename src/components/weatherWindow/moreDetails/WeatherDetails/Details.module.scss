@@ -8,8 +8,10 @@
 	width: 100%;
 	margin-top: 80px;
 	padding: 30px;
-
-	@include mQ(778px) {
+	@include mQ(778px, 6000px) {
+		margin-top: 130px;
+	}
+	@include mQ(777px) {
 		margin-top: 30px;
 	}
 	@include mQ(500px, 778px) {

@@ -8,8 +8,12 @@
 	margin: 40px auto;
 	padding: 20px;
 
-	@include mQ(500px) {
+	@include mQ(500px, 777px) {
+		margin: 0 auto 20vh;
+	}
+	@include mQ(499px) {
 		flex-direction: column;
+		margin: 0 auto 23vh;
 	}
 
 	.value {

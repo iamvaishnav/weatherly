@@ -5,6 +5,9 @@
 	width: 90%;
 	margin: 0 auto;
 
+	@include mQ(778px, 6000px) {
+		margin-top: 10px;
+	}
 	input {
 		background-color: inherit;
 		outline: none;
