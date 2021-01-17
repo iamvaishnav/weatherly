@@ -9,8 +9,8 @@ const details = (props) => (
 			<Items query='Wind' value={`${props.wind} km/hr`} />
 			<Items query='Humidity' value={`${props.humidity} %`} />
 			<Items query='Pressure' value={`${props.pressure} hPa`} />
-			<Items query='Sunrise' value={`${props.sunrise}`} />
-			<Items query='Sunset' value={`${props.sunset}`} />
+			{/* <Items query='Sunrise' value={`${props.sunrise}`} />
+			<Items query='Sunset' value={`${props.sunset}`} /> */}
 		</div>
 	</div>
 );
