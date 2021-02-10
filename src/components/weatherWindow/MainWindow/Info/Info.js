@@ -33,7 +33,7 @@ const info = (props) => {
 
 	return (
 		<div className={classes.info}>
-			<div className={classes.value}>{props.temp}&deg;</div>
+			<div className={classes.value}>{Math.round(props.temp)}&deg;</div>
 			<div className={classes.details}>
 				<div className={classes.location}>{props.city}</div>
 				{/* <div className={classes.timeDate}>{output}</div> */}

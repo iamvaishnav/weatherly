@@ -6,19 +6,12 @@ import Search from '../../containers/Search/Search';
 
 const MainWindow = (props) => {
 	const [isDesktop, setDesktop] = useState(window.innerWidth <= 778);
-	// const [weatherData, setweatherData] = useState(undefined);
 
 	const updateMedia = () => {
 		setDesktop(window.innerWidth <= 778);
 	};
 
-	// const getSearchData = (data) => {
-	// 	setweatherData(data);
-	// 	props.pullWData(data);
-	// };
-
 	useEffect(() => {
-		// console.log(weatherData);
 		window.addEventListener('resize', updateMedia);
 		return () => window.removeEventListener('resize', updateMedia);
 	});
@@ -34,7 +27,7 @@ const MainWindow = (props) => {
 				) : null}
 			</div>
 
-			<Info condition='---' temp='--' city='---' />
+			<Info condition={props.condition} temp={props.temp} city={props.city} />
 		</div>
 	);
 };
