@@ -5,38 +5,63 @@ import MoreDetails from '../../weatherWindow/moreDetails/MoreDetails';
 
 class Layout extends Component {
 	state = {
+		city: null,
 		weatherData: null,
 	};
 
-	getSearchData = (data) => {
-		this.setState({
-			weatherData: data,
-		});
+	getCityName = (name) => {
+		this.setState(
+			{
+				city: name,
+			},
+			() => console.log(this.state.city)
+		);
 	};
 	render() {
-		if (this.state.weatherData != null) {
-			const rise = new Date(this.state.weatherData.sys.sunrise * 1000);
-			const set = new Date(this.state.weatherData.sys.sunset * 1000);
-			const localOffset = -new Date().getTimezoneOffset();
-			const remoteOffset = this.state.weatherData.timezone / 60;
+		// let sunRise = '-- AM';
+		// let sunSet = '-- PM';
+		// if (this.state.weatherData != null) {
+		// 	const rise = new Date(this.state.weatherData.sys.sunrise * 1000);
+		// 	const set = new Date(this.state.weatherData.sys.sunset * 1000);
+		// 	const localOffset = -new Date().getTimezoneOffset();
+		// 	const remoteOffset = this.state.weatherData.timezone / 60;
+		// 	const localOffsetHour = (localOffset - (localOffset % 60)) / 60;
+		// 	const remoteOffsetHour = (remoteOffset - (remoteOffset % 60)) / 60;
+		// 	const sunRiseHour = rise.getHours() - (localOffsetHour - remoteOffsetHour);
+		// 	const sunRiseMinute = rise.getMinutes() - ((localOffset % 60) - (remoteOffset % 60));
 
-			console.log(rise);
-		}
+		// 	if (set.getHours() > 12 && set.getHours < 24) {
+		// 		let sunSetHour = set.getHours() - 12;
+		// 	}
+		// const sunSetHour = Math.abs(set.getHours() - (localOffsetHour - remoteOffsetHour) - 12);
+		// const sunSetMinute = Math.abs(
+		// 	set.getMinutes() - ((localOffset % 60) - (remoteOffset % 60))
+		// );
+		// sunRise = `${sunRiseHour}:${sunRiseMinute} AM`;
+		// sunSet = `${sunSetHour}:${sunSetMinute} PM`;
+		// console.log(set);
+		// }
 		return (
 			<section className={classes.layout}>
-				<MainWindow pullWData={this.getSearchData} />
-				{this.state.weatherData != null ? (
+				<MainWindow pullCity={this.getCityName} />
+
+				<MoreDetails
+					// wind={this.state.weatherData.wind.speed}
+					// humidity={this.state.weatherData.main.humidity}
+					// pressure={this.state.weatherData.main.pressure}
+					// sunset={sunSet}
+					// sunrise={sunRise}
+					pullCity={this.getCityName}
+				/>
+				{/* ) : (
 					<MoreDetails
-						wind={this.state.weatherData.wind.speed}
-						humidity={this.state.weatherData.main.humidity}
-						pressure={this.state.weatherData.main.pressure}
-						sunset={this.state.weatherData.sys.sunset}
-						sunrise={this.state.weatherData.sys.sunrise}
-						pullWData={this.getSearchData}
+						wind='--'
+						humidity='--'
+						pressure='--'
+						// sunset={sunSet}
+						// sunrise={sunRise}
 					/>
-				) : (
-					<MoreDetails wind='--' humidity='--' pressure='--' sunset='--' sunrise='--' />
-				)}
+				)} */}
 			</section>
 		);
 	}
