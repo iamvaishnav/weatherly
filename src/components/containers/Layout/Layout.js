@@ -86,39 +86,58 @@ class Layout extends Component {
 	}
 
 	render() {
-		// let sunRise = '-- AM';
-		// let sunSet = '-- PM';
-		// if (this.state.weatherData != null) {
-		// 	const rise = new Date(this.state.weatherData.sys.sunrise * 1000);
-		// 	const set = new Date(this.state.weatherData.sys.sunset * 1000);
-		// 	const localOffset = -new Date().getTimezoneOffset();
-		// 	const remoteOffset = this.state.weatherData.timezone / 60;
-		// 	const localOffsetHour = (localOffset - (localOffset % 60)) / 60;
-		// 	const remoteOffsetHour = (remoteOffset - (remoteOffset % 60)) / 60;
-		// 	const sunRiseHour = rise.getHours() - (localOffsetHour - remoteOffsetHour);
-		// 	const sunRiseMinute = rise.getMinutes() - ((localOffset % 60) - (remoteOffset % 60));
+		let sunRise = '-- AM';
+		let sunSet = '-- PM';
+		const localDate = new Date().getDate();
+		if (this.state.weatherData != null) {
+			const rise = new Date(this.state.weatherData.sys.sunrise * 1000);
+			const set = new Date(this.state.weatherData.sys.sunset * 1000);
+			const localOffset = -new Date().getTimezoneOffset();
+			const remoteOffset = this.state.weatherData.timezone / 60;
+			const localOffsetHour = (localOffset - (localOffset % 60)) / 60;
+			const remoteOffsetHour = (remoteOffset - (remoteOffset % 60)) / 60;
+			let sunRiseHour = rise.getHours() - (localOffsetHour - remoteOffsetHour);
+			let sunRiseMinute = rise.getMinutes() - ((localOffset % 60) - (remoteOffset % 60));
 
-		// 	if (set.getHours() > 12 && set.getHours < 24) {
-		// 		let sunSetHour = set.getHours() - 12;
-		// 	}
-		// const sunSetHour = Math.abs(set.getHours() - (localOffsetHour - remoteOffsetHour) - 12);
-		// const sunSetMinute = Math.abs(
-		// 	set.getMinutes() - ((localOffset % 60) - (remoteOffset % 60))
-		// );
-		// sunRise = `${sunRiseHour}:${sunRiseMinute} AM`;
-		// sunSet = `${sunSetHour}:${sunSetMinute} PM`;
-		// console.log(set);
-		// }
+			if (sunRiseMinute < 0) {
+				sunRiseMinute = 60 + sunRiseMinute;
+				sunRiseHour -= 1;
+			}
+			if (sunRiseMinute < 10) {
+				sunRiseMinute = `0${sunRiseMinute}`;
+			}
+
+			let sunSetHour = set.getHours() % 12;
+			if (localDate !== set.getDate()) {
+				sunSetHour = (sunSetHour + 24 - (localOffsetHour - remoteOffsetHour)) % 12;
+			} else {
+				sunSetHour -= localOffsetHour - remoteOffsetHour;
+			}
+			let sunSetMinute = set.getMinutes() - ((localOffset % 60) - (remoteOffset % 60));
+
+			if (sunSetMinute < 0) {
+				sunSetMinute = 60 + sunSetMinute;
+				sunSetHour -= 1;
+			}
+			if (sunSetMinute < 10) {
+				sunSetMinute = `0${sunSetMinute}`;
+			}
+			sunRise = `${sunRiseHour}:${sunRiseMinute} AM`;
+			sunSet = `${sunSetHour}:${sunSetMinute} PM`;
+			console.log(set);
+
+			console.log(sunSet);
+		}
 
 		let weather = (
 			<React.Fragment>
-				<MainWindow condition='---' temp='---' city='---' pullCity={this.getCityName} />
+				<MainWindow condition='---' temp='--' city='---' pullCity={this.getCityName} />
 				<MoreDetails
 					wind='---'
 					humidity='---'
 					pressure='---'
-					// sunset={sunSet}
-					// sunrise={sunRise}
+					sunset='-- PM'
+					sunrise='-- AM'
 					pullCity={this.getCityName}
 				/>
 			</React.Fragment>
@@ -129,7 +148,7 @@ class Layout extends Component {
 				<React.Fragment>
 					<MainWindow
 						condition={this.state.weatherData.weather[0].main}
-						temp={this.state.weatherData.main.temp}
+						temp={Math.round(this.state.weatherData.main.temp)}
 						city={this.state.weatherData.name}
 						pullCity={this.getCityName}
 					/>
@@ -137,8 +156,8 @@ class Layout extends Component {
 						wind={this.state.weatherData.wind.speed}
 						humidity={this.state.weatherData.main.humidity}
 						pressure={this.state.weatherData.main.pressure}
-						// sunset={sunSet}
-						// sunrise={sunRise}
+						sunset={sunSet}
+						sunrise={sunRise}
 						pullCity={this.getCityName}
 					/>
 				</React.Fragment>

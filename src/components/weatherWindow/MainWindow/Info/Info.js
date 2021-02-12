@@ -33,18 +33,18 @@ const info = (props) => {
 
 	return (
 		<div className={classes.info}>
-			<div className={classes.value}>{Math.round(props.temp)}&deg;</div>
+			<div className={classes.value}>{props.temp}&deg;</div>
 			<div className={classes.details}>
 				<div className={classes.location}>{props.city}</div>
 				{/* <div className={classes.timeDate}>{output}</div> */}
 			</div>
 			<div className={classes.condition}>
-				{/* <FontAwesomeIcon
+				<FontAwesomeIcon
 					icon={faCloudShowersHeavy}
 					color='white'
 					size='3x'
 					className={classes.icon}
-				/> */}
+				/>
 				<h4>{props.condition}</h4>
 			</div>
 		</div>
