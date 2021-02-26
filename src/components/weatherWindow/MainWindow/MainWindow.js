@@ -27,7 +27,12 @@ const MainWindow = (props) => {
 				) : null}
 			</div>
 
-			<Info condition={props.condition} temp={props.temp} city={props.city} />
+			<Info
+				condition={props.condition}
+				temp={props.temp}
+				city={props.city}
+				timezone={props.timezone}
+			/>
 		</div>
 	);
 };
