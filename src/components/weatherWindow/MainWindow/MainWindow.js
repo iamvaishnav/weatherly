@@ -6,19 +6,12 @@ import Search from '../../containers/Search/Search';
 
 const MainWindow = (props) => {
 	const [isDesktop, setDesktop] = useState(window.innerWidth <= 778);
-	const [weatherData, setweatherData] = useState(undefined);
 
 	const updateMedia = () => {
 		setDesktop(window.innerWidth <= 778);
 	};
 
-	const getSearchData = (data) => {
-		setweatherData(data);
-		props.pullWData(data);
-	};
-
 	useEffect(() => {
-		console.log(weatherData);
 		window.addEventListener('resize', updateMedia);
 		return () => window.removeEventListener('resize', updateMedia);
 	});
@@ -29,19 +22,17 @@ const MainWindow = (props) => {
 				{isDesktop ? (
 					<div className={classes.search}>
 						{' '}
-						<Search searchData={getSearchData} />
+						<Search getCity={props.pullCity} />
 					</div>
 				) : null}
 			</div>
-			{weatherData !== undefined ? (
-				<Info
-					condition={weatherData.weather[0].main}
-					temp={Math.round(weatherData.main.temp)}
-					city={weatherData.name}
-				/>
-			) : (
-				<Info condition='---' temp='--' city='---' />
-			)}
+
+			<Info
+				condition={props.condition}
+				temp={props.temp}
+				city={props.city}
+				timezone={props.timezone}
+			/>
 		</div>
 	);
 };
