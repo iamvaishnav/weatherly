@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classes from './Layout.module.scss';
 import MainWindow from '../../weatherWindow/MainWindow/MainWindow';
 import MoreDetails from '../../weatherWindow/moreDetails/MoreDetails';
-import zoneConverter from '../../../utility/timezoneConverter';
+import timeDateFormatter from '../../../utility/timeDateFormatter';
 import axios from '../../../axios';
 import axiosCurrent from 'axios';
 
@@ -91,12 +91,13 @@ class Layout extends Component {
         let sunSet = '-- PM';
 
         if (this.state.weatherData != null) {
-            const rise = new Date(this.state.weatherData.sys.sunrise * 1000);
-            const set = new Date(this.state.weatherData.sys.sunset * 1000);
-            sunRise = zoneConverter(this.state.weatherData.timezone, rise).time;
-            sunSet = zoneConverter(this.state.weatherData.timezone, set).time;
-
-            console.log(zoneConverter(this.state.weatherData.timezone).date);
+            const localOffset = -new Date().getTimezoneOffset();
+            const remoteOffset = this.state.weatherData.timezone / 60;
+            const tzDiff = (localOffset - remoteOffset) * 60 * 1000;
+            const rise = new Date(this.state.weatherData.sys.sunrise * 1000 - tzDiff);
+            const set = new Date(this.state.weatherData.sys.sunset * 1000 - tzDiff);
+            sunRise = timeDateFormatter(rise).time;
+            sunSet = timeDateFormatter(set).time;
         }
 
         let weather = (
