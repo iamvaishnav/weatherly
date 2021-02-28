@@ -1,4 +1,4 @@
-const timeZoneFormatter = (date) => {
+const timeZoneFormatter = (date, round = true) => {
     const monthNames = [
         'Jan',
         'Feb',
@@ -24,8 +24,10 @@ const timeZoneFormatter = (date) => {
     let seconds = date.getSeconds();
     let time;
 
-    if (seconds > 30) {
-        minutes += 1;
+    if (round) {
+        if (seconds > 30) {
+            minutes += 1;
+        }
     }
 
     if (minutes < 10) {
