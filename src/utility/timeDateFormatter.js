@@ -43,7 +43,7 @@ const timeZoneFormatter = (date, round = true) => {
         time = `${hour}:${minutes} PM`;
     }
 
-    const dateString = `${time} ${day}, ${localDate} ${month}'${year}`;
+    const dateString = `${time} ${day}, ${localDate} ${month} '${year}`;
 
     return {
         time,
