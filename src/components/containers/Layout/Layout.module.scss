@@ -1,19 +1,19 @@
 @import '../../../scss/mixins';
 
 .layout {
-	display: flex;
-	height: 100vh;
-	width: 100%;
-	background: url('../../../assets/default.jpg') center no-repeat;
-	background-size: cover;
-	overflow-x: hidden;
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    background: url('../../../assets/default.jpg') center no-repeat;
+    background-size: cover;
+    overflow-x: hidden;
 
-	@include mQ(500px, 778px) {
-		flex-direction: column;
-		height: 170vh;
-	}
-	@include mQ(499px) {
-		flex-direction: column;
-		height: 160vh;
-	}
+    @include mQ(500px, 778px) {
+        flex-direction: column;
+        height: 170vh;
+    }
+    @include mQ(500px) {
+        flex-direction: column;
+        height: 160vh;
+    }
 }
