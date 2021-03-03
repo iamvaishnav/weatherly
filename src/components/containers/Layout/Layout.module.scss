@@ -1,19 +1,54 @@
 @import '../../../scss/mixins';
 
 .layout {
-	display: flex;
-	height: 100vh;
-	width: 100%;
-	background: url('../../../assets/default.jpg') center no-repeat;
-	background-size: cover;
-	overflow-x: hidden;
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+    transition: all 0.5s ease;
 
-	@include mQ(500px, 778px) {
-		flex-direction: column;
-		height: 170vh;
-	}
-	@include mQ(499px) {
-		flex-direction: column;
-		height: 160vh;
-	}
+    @include mQ(500px, 778px) {
+        flex-direction: column;
+        height: 170vh;
+    }
+    @include mQ(500px) {
+        flex-direction: column;
+        height: 160vh;
+    }
+}
+
+.fog {
+    background: url('../../../assets/default.jpg') center no-repeat;
+    background-size: cover;
+}
+
+.thunderstorm {
+    background: url('../../../assets/thunderstorm.jpg') center no-repeat;
+    background-size: cover;
+}
+
+.drizzle,
+.rain {
+    background: url('../../../assets/rainy.jpg') center no-repeat;
+    background-size: cover;
+}
+
+.snow {
+    background: url('../../../assets/snowy.jpg') center no-repeat;
+    background-size: cover;
+}
+
+.clear {
+    background: url('../../../assets/clear.jpg') top no-repeat;
+    background-size: cover;
+}
+
+.clouds {
+    background: url('../../../assets/cloudy.jpg') center no-repeat;
+    background-size: cover;
+}
+
+.default {
+    background: url('../../../assets/default.jpg') center no-repeat;
+    background-size: cover;
 }
