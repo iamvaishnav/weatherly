@@ -137,10 +137,9 @@
         }
 
         .icon {
-            margin-top: 10px;
-            margin-left: 5px;
-
             @include mQ(500px) {
+                margin-top: 10px;
+                margin-left: 5px;
                 font-size: 28px;
             }
             @include mQ(500px, 600px) {
