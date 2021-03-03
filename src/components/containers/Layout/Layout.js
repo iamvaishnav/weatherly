@@ -173,9 +173,7 @@ class Layout extends Component {
         }
 
         return (
-            <section className={[classes.layout, classes['thunderstorm']].join(' ')}>
-                {weather}
-            </section>
+            <section className={[classes.layout, classes[weatherImg]].join(' ')}>{weather}</section>
         );
     }
 }
