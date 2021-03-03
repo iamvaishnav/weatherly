@@ -5,36 +5,37 @@ import Info from './Info/Info';
 import Search from '../../containers/Search/Search';
 
 const MainWindow = (props) => {
-	const [isDesktop, setDesktop] = useState(window.innerWidth <= 778);
+    const [isDesktop, setDesktop] = useState(window.innerWidth <= 778);
 
-	const updateMedia = () => {
-		setDesktop(window.innerWidth <= 778);
-	};
+    const updateMedia = () => {
+        setDesktop(window.innerWidth <= 778);
+    };
 
-	useEffect(() => {
-		window.addEventListener('resize', updateMedia);
-		return () => window.removeEventListener('resize', updateMedia);
-	});
-	return (
-		<div className={classes.main}>
-			<div className={classes.navBar}>
-				<Logo />
-				{isDesktop ? (
-					<div className={classes.search}>
-						{' '}
-						<Search getCity={props.pullCity} />
-					</div>
-				) : null}
-			</div>
+    useEffect(() => {
+        window.addEventListener('resize', updateMedia);
+        return () => window.removeEventListener('resize', updateMedia);
+    });
+    return (
+        <div className={classes.main}>
+            <div className={classes.navBar}>
+                <Logo />
+                {isDesktop ? (
+                    <div className={classes.search}>
+                        {' '}
+                        <Search getCity={props.pullCity} />
+                    </div>
+                ) : null}
+            </div>
 
-			<Info
-				condition={props.condition}
-				temp={props.temp}
-				city={props.city}
-				timezone={props.timezone}
-			/>
-		</div>
-	);
+            <Info
+                condition={props.condition}
+                temp={props.temp}
+                city={props.city}
+                timezone={props.timezone}
+                weatherIcon={props.weatherIcon}
+            />
+        </div>
+    );
 };
 
 export default MainWindow;

@@ -123,26 +123,6 @@ class Layout extends Component {
         let weatherImg = 'default';
 
         if (this.state.weatherData) {
-            weather = (
-                <React.Fragment>
-                    <MainWindow
-                        condition={this.state.weatherData.weather[0].main}
-                        temp={Math.round(this.state.weatherData.main.temp)}
-                        city={this.state.weatherData.name}
-                        pullCity={this.getCityName}
-                        timezone={this.state.weatherData.timezone}
-                    />
-                    <MoreDetails
-                        wind={this.state.weatherData.wind.speed}
-                        humidity={this.state.weatherData.main.humidity}
-                        pressure={this.state.weatherData.main.pressure}
-                        sunset={sunSet}
-                        sunrise={sunRise}
-                        pullCity={this.getCityName}
-                    />
-                </React.Fragment>
-            );
-
             switch (this.state.weatherData.weather[0].main) {
                 case 'Fog':
                     weatherImg = 'fog';
@@ -151,7 +131,7 @@ class Layout extends Component {
                     weatherImg = 'thunderstorm';
                     break;
                 case 'Drizzle':
-                    weatherImg = 'drizzle';
+                    weatherImg = 'rain';
                     break;
                 case 'Rain':
                     weatherImg = 'rain';
@@ -165,10 +145,39 @@ class Layout extends Component {
                 case 'Clouds':
                     weatherImg = 'clouds';
                     break;
+                case 'Mist':
+                    weatherImg = 'fog';
+                    break;
+                case 'Haze':
+                    weatherImg = 'fog';
+                    break;
+
                 default:
                     weatherImg = 'default';
                     break;
             }
+
+            weather = (
+                <React.Fragment>
+                    <MainWindow
+                        condition={this.state.weatherData.weather[0].main}
+                        temp={Math.round(this.state.weatherData.main.temp)}
+                        city={this.state.weatherData.name}
+                        pullCity={this.getCityName}
+                        timezone={this.state.weatherData.timezone}
+                        weatherIcon={weatherImg}
+                    />
+                    <MoreDetails
+                        wind={this.state.weatherData.wind.speed}
+                        humidity={this.state.weatherData.main.humidity}
+                        pressure={this.state.weatherData.main.pressure}
+                        sunset={sunSet}
+                        sunrise={sunRise}
+                        pullCity={this.getCityName}
+                    />
+                </React.Fragment>
+            );
+
             console.log(weatherImg);
         }
 

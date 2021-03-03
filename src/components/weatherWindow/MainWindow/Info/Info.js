@@ -3,7 +3,13 @@ import classes from './Info.module.scss';
 import timeDateFormatter from '../../../../utility/timeDateFormatter';
 // import { WiRain } from 'weather-icons-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCloudShowersHeavy } from '@fortawesome/free-solid-svg-icons';
+import {
+    faCloudShowersHeavy,
+    faSun,
+    faCloud,
+    faSnowflake,
+    faSmog,
+} from '@fortawesome/free-solid-svg-icons';
 
 const Info = (props) => {
     const localOffset = -new Date().getTimezoneOffset();
@@ -21,6 +27,36 @@ const Info = (props) => {
         timeDateInfo = timeDateFormatter(remoteTime, false).date;
         setTime(timeDateInfo);
     }, 1000);
+
+    let icon;
+    switch (props.weatherIcon) {
+        case 'rain':
+            icon = faCloudShowersHeavy;
+            break;
+        case 'clear':
+            icon = faSun;
+            break;
+        case 'clouds':
+            icon = faCloud;
+            break;
+        case 'snow':
+            icon = faSnowflake;
+            break;
+        case 'fog':
+            icon = faSmog;
+            break;
+        case 'mist':
+            icon = faSmog;
+            break;
+        case 'haze':
+            icon = faSmog;
+            break;
+
+        default:
+            icon = faSun;
+            break;
+    }
+
     return (
         <div className={classes.info}>
             <div className={classes.value}>{props.temp}&deg;</div>
@@ -29,12 +65,7 @@ const Info = (props) => {
                 <div className={classes.timeDate}>{timeDateInfo}</div>
             </div>
             <div className={classes.condition}>
-                <FontAwesomeIcon
-                    icon={faCloudShowersHeavy}
-                    color='white'
-                    size='3x'
-                    className={classes.icon}
-                />
+                <FontAwesomeIcon icon={icon} color='white' size='3x' className={classes.icon} />
                 <h4>{props.condition}</h4>
             </div>
         </div>
