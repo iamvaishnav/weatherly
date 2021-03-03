@@ -120,6 +120,8 @@ class Layout extends Component {
             </React.Fragment>
         );
 
+        let weatherImg = 'default';
+
         if (this.state.weatherData) {
             weather = (
                 <React.Fragment>
@@ -140,8 +142,41 @@ class Layout extends Component {
                     />
                 </React.Fragment>
             );
+
+            switch (this.state.weatherData.weather[0].main) {
+                case 'Fog':
+                    weatherImg = 'fog';
+                    break;
+                case 'Thunderstorm':
+                    weatherImg = 'thunderstorm';
+                    break;
+                case 'Drizzle':
+                    weatherImg = 'drizzle';
+                    break;
+                case 'Rain':
+                    weatherImg = 'rain';
+                    break;
+                case 'Snow':
+                    weatherImg = 'snow';
+                    break;
+                case 'Clear':
+                    weatherImg = 'clear';
+                    break;
+                case 'Clouds':
+                    weatherImg = 'clouds';
+                    break;
+                default:
+                    weatherImg = 'default';
+                    break;
+            }
+            console.log(weatherImg);
         }
-        return <section className={classes.layout}>{weather}</section>;
+
+        return (
+            <section className={[classes.layout, classes['thunderstorm']].join(' ')}>
+                {weather}
+            </section>
+        );
     }
 }
 
