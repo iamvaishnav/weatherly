@@ -27,15 +27,6 @@ const MainWindow = (props) => {
                 ) : null}
             </div>
 
-            {/* {!props.show ? (
-                <Info
-                    condition={props.condition}
-                    temp={props.temp}
-                    city={props.city}
-                    timezone={props.timezone}
-                    weatherIcon={props.weatherIcon}
-                />
-            ) : null} */}
             <Info
                 condition={props.condition}
                 temp={props.temp}
