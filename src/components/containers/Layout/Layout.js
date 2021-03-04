@@ -5,6 +5,8 @@ import MoreDetails from '../../weatherWindow/moreDetails/MoreDetails';
 import timeDateFormatter from '../../../utility/timeDateFormatter';
 import axios from '../../../axios';
 import axiosCurrent from 'axios';
+import Backdrop from '../../weatherWindow/Backdrop/backdrop';
+import Spinner from '../../weatherWindow/Spinner/spinner';
 
 const apiKey = '79a3b91460dd7597763284d7409af41d';
 
@@ -13,12 +15,14 @@ class Layout extends Component {
         city: null,
         weatherData: null,
         error: null,
+        show: true,
     };
 
     getCityName = (name) => {
         this.setState(
             {
                 city: name,
+                show: true,
             },
             () => this.getWeatherData()
         );
@@ -30,16 +34,19 @@ class Layout extends Component {
             .get(`weather?q=${city}&appid=${apiKey}&units=metric`)
             .then((resolve) => {
                 const weatherData = resolve.data;
-                this.setState(
-                    {
+                this.setState((prevState) => {
+                    return {
                         weatherData: weatherData,
-                    },
-                    () => console.log(this.state.weatherData)
-                );
+                        show: false,
+                    };
+                });
             })
             .catch((err) => {
-                this.setState({
-                    error: err,
+                this.setState((prevState) => {
+                    return {
+                        error: err,
+                        show: false,
+                    };
                 });
                 console.log(err);
             });
@@ -108,6 +115,7 @@ class Layout extends Component {
                     city='---'
                     pullCity={this.getCityName}
                     timezone='0000'
+                    show={this.state.show}
                 />
                 <MoreDetails
                     wind='---'
@@ -166,6 +174,7 @@ class Layout extends Component {
                         pullCity={this.getCityName}
                         timezone={this.state.weatherData.timezone}
                         weatherIcon={weatherImg}
+                        show={this.state.show}
                     />
                     <MoreDetails
                         wind={this.state.weatherData.wind.speed}
@@ -177,12 +186,15 @@ class Layout extends Component {
                     />
                 </React.Fragment>
             );
-
-            console.log(weatherImg);
         }
 
         return (
-            <section className={[classes.layout, classes[weatherImg]].join(' ')}>{weather}</section>
+            <section className={[classes.layout, classes[weatherImg]].join(' ')}>
+                <Backdrop show={this.state.show}>
+                    <Spinner />
+                </Backdrop>
+                {weather}
+            </section>
         );
     }
 }

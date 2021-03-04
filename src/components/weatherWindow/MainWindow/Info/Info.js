@@ -58,7 +58,7 @@ const Info = (props) => {
     }
 
     return (
-        <div className={classes.info}>
+        <div className={[classes.info, !props.show ? classes.show : null].join(' ')}>
             <div className={classes.value}>{props.temp}&deg;</div>
             <div className={classes.details}>
                 <div className={classes.location}>{props.city}</div>
