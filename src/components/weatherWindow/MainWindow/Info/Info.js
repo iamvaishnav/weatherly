@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from 'react';
 import classes from './Info.module.scss';
 import timeDateFormatter from '../../../../utility/timeDateFormatter';
 // import { WiRain } from 'weather-icons-react';
@@ -21,12 +22,16 @@ const Info = (props) => {
 
     const [, setTime] = useState(timeDateInfo);
 
-    setInterval(() => {
-        localTime = Date.now();
-        remoteTime = new Date(localTime - tzDiff);
-        timeDateInfo = timeDateFormatter(remoteTime, false).date;
-        setTime(timeDateInfo);
-    }, 1000);
+    useEffect(() => {
+        const timer = setInterval(() => {
+            localTime = Date.now();
+            remoteTime = new Date(localTime - tzDiff);
+            timeDateInfo = timeDateFormatter(remoteTime, false).date;
+            setTime(timeDateInfo);
+        }, 1000);
+
+        return clearInterval(timer);
+    }, []);
 
     let icon;
     switch (props.weatherIcon) {
