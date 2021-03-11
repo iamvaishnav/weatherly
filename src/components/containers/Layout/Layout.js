@@ -7,6 +7,7 @@ import axios from '../../../axios';
 import axiosCurrent from 'axios';
 import Backdrop from '../../weatherWindow/Backdrop/backdrop';
 import Spinner from '../../weatherWindow/Spinner/spinner';
+import { Redirect } from 'react-router-dom';
 
 const apiKey = '79a3b91460dd7597763284d7409af41d';
 
@@ -189,12 +190,15 @@ class Layout extends Component {
         }
 
         return (
-            <section className={[classes.layout, classes[weatherImg]].join(' ')}>
-                <Backdrop show={this.state.show}>
-                    <Spinner />
-                </Backdrop>
-                {weather}
-            </section>
+            <React.Fragment>
+                {this.state.error ? <Redirect to='error' /> : null}
+                <section className={[classes.layout, classes[weatherImg]].join(' ')}>
+                    <Backdrop show={this.state.show}>
+                        <Spinner />
+                    </Backdrop>
+                    {weather}
+                </section>
+            </React.Fragment>
         );
     }
 }
