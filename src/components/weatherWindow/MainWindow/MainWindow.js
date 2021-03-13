@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import classes from './MainWindow.module.scss';
-import Logo from '../../containers/Logo/Logo';
+import Logo from '../Logo/Logo';
 import Info from './Info/Info';
 import Search from '../../containers/Search/Search';
 

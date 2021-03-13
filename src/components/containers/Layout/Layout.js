@@ -55,7 +55,6 @@ class Layout extends Component {
 
     componentDidMount() {
         const success = (position) => {
-            console.log('working');
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
 
@@ -88,10 +87,26 @@ class Layout extends Component {
         };
 
         const error = () => {
-            console.log('Something went wrong');
+            window.alert(' Unable to retrieve your location. London is set as default location.');
+            axios
+                .get(`weather?q=london&appid=${apiKey}&units=metric`)
+                .then((resolve) => {
+                    const weatherData = resolve.data;
+                    this.setState({
+                        weatherData: weatherData,
+                        show: false,
+                    });
+                })
+                .catch((err) => {
+                    this.setState({
+                        error: err,
+                        show: false,
+                    });
+                    console.log(err);
+                });
         };
 
-        navigator.geolocation.getCurrentPosition(success, error, { timeout: 10000 });
+        navigator.geolocation.getCurrentPosition(success, error, { timeout: 2000 });
     }
 
     render() {
